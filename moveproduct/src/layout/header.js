@@ -1,14 +1,21 @@
 import React , {useState} from "react";
 import Pagination from "react-js-pagination";
 import { connect } from 'react-redux';
+import { addTodo } from "../actions/actionMoveData";
 
-function Header(props) {
+function Header() {
     const [loading,setLoading] = useState('');
     const [activePage,setActivePage] = useState(1);
-
+    const [formData, updateFormData] = useState([]);
+    const handleChange = (e) => {
+        updateFormData({
+          ...formData,
+          [e.target.name]: e.target.value.trim()
+        });
+      };
     const runTest = () =>{
-
         setLoading('loading');
+        addTodo(formData);
         setTimeout(() => {
             setLoading('');
         }, 1000);
@@ -31,7 +38,7 @@ function Header(props) {
             </span>
             <div className="input-prepend mb-3">
                 <span className="add-on">Keyword</span>
-                <input id="keyword" name="keyword" className="input-xlarge form-control" placeholder="pullze,pijama ..." type="text"/>
+                <input id="keyword" name="keyword" className="input-xlarge form-control" placeholder="pullze,pijama ..." onChange={handleChange}  type="text"/>
             </div>
             <div className="databases mb-3">
                 <div className="col-12">
@@ -131,7 +138,7 @@ const mapStateToProps = (state, ownprops) => {
   };
 function mapDispatchToProps(dispatch){
     return{
-       
+        addTodo:(formData) => dispatch(addTodo(formData))
     } 
 }
 
