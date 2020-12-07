@@ -1,12 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import rootreducer from './reducers/moveDataReducers';
 import reportWebVitals from './reportWebVitals';
 
+
+
+import "bootstrap/dist/css/bootstrap.css";
+import "./asset/main.css";
+
+// qua trinh thuc hien redux store action -> reducer -> store -> view 
+const store = createStore(rootreducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
