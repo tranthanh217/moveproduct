@@ -1,11 +1,23 @@
 import { ADD_TODO } from '../actions/actionType';
 const initialState = {
-    id:'',
     keyword:'',
-    data1:'',
-    data2:'',
-    tax:{}
+    datafirst:'',
+    datasecond:'',
+    tax:[]
   };
+
+  export default function (state = initialState, action) {
+    switch (action.type) {
+      case ADD_TODO:
+        return({keyword: action.payload.keyword,
+                datafirst:action.payload.datafirst,
+                datasecond:action.payload.datasecond,
+                tax:action.payload.tax
+              });
+      default:
+        return state;
+    }
+  }
   // export default (state = initialState, action) => {
   //   console.log(action);
   //   switch (action.type){
@@ -18,14 +30,3 @@ const initialState = {
   //       return state;
   //   }   
   // };
-
-  export default function postReducer(state = initialState, action) {
-    console.log(action.type);
-    switch (action.type) {
-      case ADD_TODO:
-        // return [...state, action.payload];
-        break;
-      default:
-        return state;
-    }
-  }

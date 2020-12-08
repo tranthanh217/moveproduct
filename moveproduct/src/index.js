@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import { Provider } from 'react-redux';
+
 import { createStore } from 'redux';
-import rootreducer from './reducers/moveDataReducers';
+import { Provider } from 'react-redux';
+
+import App from './App';
+import rootreducer from './reducers/rootReducers';
+
 import reportWebVitals from './reportWebVitals';
-
-
 
 import "bootstrap/dist/css/bootstrap.css";
 import "./asset/main.css";

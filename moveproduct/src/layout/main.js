@@ -1,9 +1,9 @@
 import React , {useState} from "react";
 import Pagination from "react-js-pagination";
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { addTodo } from "../actions/actionMoveData";
 
-function Header() {
+function Header(props) {
     const [loading,setLoading] = useState('');
     const [activePage,setActivePage] = useState(1);
     const [formData, updateFormData] = useState([]);
@@ -13,11 +13,14 @@ function Header() {
           [e.target.name]: e.target.value.trim()
         });
       };
-    const runTest = () =>{
+
+    const runTest = (e) =>{
+        e.preventDefault();
         setLoading('loading');
-        addTodo(formData);
+        props.addTodo({formData});
         setTimeout(() => {
             setLoading('');
+            updateFormData([]);
         }, 1000);
     };
     const submitMoveData = () =>{
@@ -27,9 +30,9 @@ function Header() {
         }, 1000);
     };
     const handlePageChange = (pageNumber) => {
-        console.log(`active page is ${pageNumber}`);
         setActivePage(pageNumber);
       }
+      
   return (
       <div className="container-contact100">
           <div className="wrap-contact100">
@@ -45,14 +48,18 @@ function Header() {
                     <div className="row justify-content-between position-relative">
                         <div className="input-prepend">
                             <span className="add-on"><i className="fa fa-database" aria-hidden="true"> </i> data 1</span>
-                            <select className="custom-select select-data-one d-block">
-                                <option value="">Choose store...</option>
+                            <select className="custom-select select-data-one d-block" name="database_first" onChange={handleChange}>
+                                <option value="null">Choose store...</option>
+                                <option value="datafirst-1">data first 1</option>
+                                <option value="datafirst-2">data first 2</option>
                             </select>
                         </div>
                         <div className="input-prepend">
                             <span className="add-on"><i className="fa fa-database" aria-hidden="true"> </i> data 2</span>
-                            <select className="custom-select select-data-two d-block">
+                            <select className="custom-select select-data-two d-block" name="database_second" onChange={handleChange}>
                                 <option value="">Choose store...</option>
+                                <option value="datasecond-1">data second 1</option>
+                                <option value="datasecond-2">data second 2</option>
                             </select>
                         </div>
                         <div className={`icon-move load ${loading}`}>
@@ -64,15 +71,15 @@ function Header() {
             <div className="border-line position-relative mb-4">
                 <span className="title-tax">Taxonomy</span>
                 <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1"/>
+                    <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="product_cat" name="product_cat" onChange={handleChange}/>
                     <label className="form-check-label" htmlFor="inlineCheckbox1">Product category</label>
                     </div>
                     <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2"/>
+                    <input className="form-check-input" type="checkbox" id="inlineCheckbox2" value="product_tag" name="product_tag" onChange={handleChange}/>
                     <label className="form-check-label" htmlFor="inlineCheckbox2">Product tag</label>
                     </div>
                     <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" />
+                    <input className="form-check-input" type="checkbox" id="inlineCheckbox3" value="collection" name="collection" onChange={handleChange} />
                     <label className="form-check-label" htmlFor="inlineCheckbox3">Collections</label>
                 </div>
             </div>
@@ -131,16 +138,11 @@ function Header() {
     
   );
 }
-const mapStateToProps = (state, ownprops) => {
-    return {
-       
-      };
-  };
 function mapDispatchToProps(dispatch){
     return{
         addTodo:(formData) => dispatch(addTodo(formData))
     } 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(null, mapDispatchToProps)(Header);
 
