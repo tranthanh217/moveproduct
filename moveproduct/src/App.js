@@ -1,10 +1,10 @@
 import React from 'react';
-import Header from "./layout/main";
+import ProductImportData from "./feature/productImportData/productImportDataComponent";
 
 function App() {
   return (
     <div className="moveProduct">
-        <Header />
+        <ProductImportData />
     </div>
   );
 }

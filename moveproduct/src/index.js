@@ -5,14 +5,14 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 import App from './App';
-import rootreducer from './reducers/rootReducers';
+import rootreducer from './feature/rootReducers';
 
 import reportWebVitals from './reportWebVitals';
 
 import "bootstrap/dist/css/bootstrap.css";
 import "./asset/main.css";
 
-// qua trinh thuc hien redux store action -> reducer -> store -> view 
+
 const store = createStore(rootreducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 ReactDOM.render(
   <Provider store={store}>
