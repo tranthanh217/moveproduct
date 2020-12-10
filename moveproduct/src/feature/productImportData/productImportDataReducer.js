@@ -13,9 +13,11 @@ const initialState = {
                 keyword: action.payload.keyword,
                 datafirst: action.payload.datafirst,
                 datasecond: action.payload.datasecond,
-                tax: action.payload.tax
+                tax: action.payload.tax,
+                loading:action.payload.loading
               });
       default:
         return state;
     }
-  }
+  };
+

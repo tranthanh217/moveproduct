@@ -2,24 +2,21 @@ import React , { useEffect, useState} from "react";
 import Pagination from "react-js-pagination";
 import {  useSelector, useDispatch, shallowEqual } from 'react-redux';
 import {addTodo} from "./productImportDataAction";
-import ListLinkResult from "../../feature/listLink/listLinkResultComponent";
+import {getListResult} from "../listLink/listLinkResultAction";
+import ListLinkResult from "../listLink/listLinkResultComponent";
 
 function ProductImportData() {
     const dispatch = useDispatch();
     const showKeyWordTest = useSelector((state) =>  (state.getInforDB),shallowEqual);
+    const listResult = useSelector((state) =>  (state.getLR),shallowEqual);
     const [loading,setLoading] = useState(false);
     const [activePage,setActivePage] = useState(1);
     const [formData, updateFormData] = useState([]);
-    const [listResult, setListResult] = useState([{id:1}]) 
-   
-    for (let index = 2; index <= 100; index++) {
-        // setListResult([...listResult,{id: index}]);
-    }
- 
-    useEffect(()=>{
-        // console.log(listResult);
-    },[activePage])
-   
+
+    // useEffect(()=>{
+    //     dispatch(getListResult(activePage));
+    // },[activePage])
+
     const handleChange = (e) => {
         updateFormData({
           ...formData,
@@ -39,16 +36,15 @@ function ProductImportData() {
         setTimeout(() => {
             setLoading(false);
             updateFormData([]);
-        }, 1000);
+        }, 500);
     };
   
     const submitMoveData = () =>{
         setLoading(true);
-        console.log(listResult);
-        // todo submit
+        dispatch(getListResult(activePage));
         setTimeout(() => {
             setLoading(false);
-        }, 1000);
+        }, 500);
     };
     const handlePageChange = (pageNumber) => {
         setActivePage(pageNumber);
@@ -119,9 +115,9 @@ function ProductImportData() {
             <Pagination
                 hideDisabled
                 activePage={activePage}
-                itemsCountPerPage={10}
-                totalItemsCount={100}
-                pageRangeDisplayed={5}
+                itemsCountPerPage={2}
+                totalItemsCount={listResult.length}
+                pageRangeDisplayed={2}
                 onChange={handlePageChange}
                 />
           </div>

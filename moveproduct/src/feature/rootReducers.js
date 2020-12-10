@@ -1,6 +1,10 @@
 import { combineReducers } from 'redux';
 import inforDBReducers from './productImportData/productImportDataReducer';
+import getListResultReducers from './listLink/listLinkResultReducer';
 
-export default combineReducers({
-    getInforDB : inforDBReducers
+  const rootReducer = combineReducers({
+    getInforDB : inforDBReducers,
+    getLR : getListResultReducers
   });
+  
+  export default rootReducer;
